@@ -1,14 +1,13 @@
-import { auth } from "@/auth";
+import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const session = await auth();
-  if (session?.user) redirect("/dashboard");
+  const { userId } = await auth();
+  if (userId) redirect("/dashboard");
 
   return (
     <main className="flex-1 flex flex-col items-center justify-center px-4 pt-16 overflow-hidden">
-      {/* Background glow */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-indigo-600/20 rounded-full blur-[120px]" />
         <div className="absolute top-1/2 -left-40 w-[400px] h-[400px] bg-violet-600/10 rounded-full blur-[100px]" />
@@ -47,12 +46,11 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* Feature cards */}
       <div className="relative max-w-4xl w-full grid grid-cols-1 sm:grid-cols-3 gap-5 pb-24">
         {[
-          { title: "Authentication", desc: "GitHub, Google, or email & password — all handled securely.", icon: "🔐", delay: "animate-delay-100" },
-          { title: "Free Database",  desc: "PostgreSQL on Neon with Prisma ORM. Zero cost to start.",    icon: "🗄️", delay: "animate-delay-200" },
-          { title: "Auto Deploy",    desc: "Live on Vercel with automatic deployments on every push.",    icon: "🚀", delay: "animate-delay-300" },
+          { title: "Authentication", desc: "Email/password, Google, GitHub — with verification and password reset.", icon: "🔐", delay: "animate-delay-100" },
+          { title: "Free Database",  desc: "PostgreSQL on Neon with Prisma ORM. Zero cost to start.",              icon: "🗄️", delay: "animate-delay-200" },
+          { title: "Auto Deploy",    desc: "Live on Vercel with automatic deployments on every push.",              icon: "🚀", delay: "animate-delay-300" },
         ].map((f) => (
           <div
             key={f.title}
