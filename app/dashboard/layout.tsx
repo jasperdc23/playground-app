@@ -25,7 +25,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
         <div className="p-4 border-t border-white/8">
           <div className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
-            <UserButton afterSignOutUrl="/" />
+            <UserButton />
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-white truncate">
                 {user?.fullName ?? user?.emailAddresses[0]?.emailAddress}

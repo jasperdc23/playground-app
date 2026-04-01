@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
+import { dark } from "@clerk/themes"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 const geist = Geist({
   variable: "--font-geist-sans",
