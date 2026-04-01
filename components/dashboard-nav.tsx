@@ -5,6 +5,15 @@ import { usePathname } from "next/navigation";
 
 const links = [
   {
+    href: "/",
+    label: "Home",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+    ),
+  },
+  {
     href: "/dashboard",
     label: "Dashboard",
     icon: (
@@ -29,7 +38,7 @@ export default function DashboardNav() {
   const pathname = usePathname();
 
   return (
-    <>
+    <div className="space-y-1">
       {links.map((link) => {
         const active = pathname === link.href;
         return (
@@ -38,16 +47,16 @@ export default function DashboardNav() {
             href={link.href}
             className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
               active
-                ? "bg-indigo-600/20 text-indigo-300 border border-indigo-500/30"
-                : "text-gray-400 hover:text-white hover:bg-white/5"
+                ? "bg-indigo-600/25 text-white border border-indigo-500/40"
+                : "text-gray-400 hover:text-white hover:bg-white/[0.07]"
             }`}
           >
-            {link.icon}
+            <span className={active ? "text-indigo-400" : ""}>{link.icon}</span>
             {link.label}
             {active && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-400" />}
           </Link>
         );
       })}
-    </>
+    </div>
   );
 }
