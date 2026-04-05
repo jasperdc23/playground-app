@@ -45,13 +45,14 @@ export default function DashboardNav() {
           <Link
             key={link.href}
             href={link.href}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+            style={
               active
-                ? "bg-indigo-600/25 text-white border border-indigo-500/40"
-                : "text-gray-400 hover:text-white hover:bg-white/[0.07]"
-            }`}
+                ? { background: "rgba(99,102,241,0.2)", border: "1px solid rgba(99,102,241,0.4)", color: "#ffffff" }
+                : { border: "1px solid transparent", color: "#9ca3af" }
+            }
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-white/[0.06] hover:text-white"
           >
-            <span className={active ? "text-indigo-400" : ""}>{link.icon}</span>
+            <span style={{ color: active ? "#818cf8" : "inherit" }}>{link.icon}</span>
             {link.label}
             {active && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-400" />}
           </Link>

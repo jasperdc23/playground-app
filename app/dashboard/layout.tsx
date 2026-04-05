@@ -11,11 +11,11 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const user = await currentUser();
 
   return (
-    <div className="min-h-screen flex bg-[#030712]">
+    <div className="min-h-screen flex" style={{ background: "#030712" }}>
       {/* Sidebar */}
-      <aside className="w-64 shrink-0 flex flex-col border-r border-white/[0.08]" style={{ background: "rgba(255,255,255,0.02)" }}>
+      <aside className="w-64 shrink-0 flex flex-col" style={{ background: "#0d1117", borderRight: "1px solid #1f2937" }}>
         {/* Logo */}
-        <div className="h-16 flex items-center px-5 border-b border-white/[0.08]">
+        <div className="h-16 flex items-center px-5" style={{ borderBottom: "1px solid #1f2937" }}>
           <Link href="/" className="text-xl font-bold text-white tracking-tight">
             Playground<span className="text-indigo-400">.</span>
           </Link>
@@ -23,19 +23,19 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
         {/* Nav */}
         <nav className="flex-1 p-3">
-          <p className="text-[11px] font-semibold text-gray-600 uppercase tracking-widest px-3 mb-2">Menu</p>
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest px-3 mb-2">Menu</p>
           <DashboardNav />
         </nav>
 
         {/* User */}
-        <div className="p-3 border-t border-white/[0.08]">
-          <div className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/[0.05] transition-colors cursor-default">
+        <div className="p-3" style={{ borderTop: "1px solid #1f2937" }}>
+          <div className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/[0.05] transition-colors">
             <UserButton />
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-white truncate">
+              <p className="text-sm font-semibold text-white truncate">
                 {user?.fullName ?? user?.firstName ?? "User"}
               </p>
-              <p className="text-xs text-gray-500 truncate">
+              <p className="text-xs text-gray-400 truncate">
                 {user?.emailAddresses[0]?.emailAddress}
               </p>
             </div>
@@ -43,23 +43,25 @@ export default async function DashboardLayout({ children }: { children: React.Re
         </div>
       </aside>
 
-      {/* Main content */}
+      {/* Main */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Top bar */}
-        <header className="h-16 flex items-center justify-between px-8 border-b border-white/[0.08]" style={{ background: "rgba(255,255,255,0.01)" }}>
+        {/* Header */}
+        <header className="h-16 flex items-center justify-between px-8" style={{ background: "#0a0f1a", borderBottom: "1px solid #1f2937" }}>
           <div>
             <p className="text-sm font-semibold text-white">
-              {user?.fullName ? `Welcome back, ${user.fullName.split(" ")[0]}` : "Dashboard"}
+              Welcome back, {user?.firstName ?? "User"}
             </p>
-            <p className="text-xs text-gray-500">{new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</p>
+            <p className="text-xs text-gray-400">
+              {new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
+            </p>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-xs text-gray-400">Connected</span>
+          <div className="flex items-center gap-2 bg-green-400/10 border border-green-400/20 rounded-full px-3 py-1">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+            <span className="text-xs font-medium text-green-400">Connected</span>
           </div>
         </header>
 
-        {/* Page content */}
+        {/* Content */}
         <main className="flex-1 p-8 overflow-auto">
           {children}
         </main>

@@ -8,38 +8,37 @@ export default async function SettingsPage() {
     <div className="max-w-3xl space-y-6 animate-fade-in">
       <div>
         <h1 className="text-2xl font-bold text-white">Settings</h1>
-        <p className="text-gray-400 mt-1 text-sm">Manage your account, security and preferences</p>
+        <p className="text-gray-400 mt-1 text-sm">Manage your account, security, and preferences</p>
       </div>
 
-      {/* Account summary */}
-      <div className="rounded-2xl border border-white/[0.08] overflow-hidden" style={{ background: "rgba(255,255,255,0.03)" }}>
-        <div className="px-6 py-4 border-b border-white/[0.08]">
-          <h2 className="font-semibold text-white flex items-center gap-2">
-            <span className="text-indigo-400">ℹ️</span> Account Info
-          </h2>
+      {/* Account info */}
+      <div className="rounded-2xl overflow-hidden" style={{ background: "#111827", border: "1px solid #1f2937" }}>
+        <div className="px-6 py-4" style={{ borderBottom: "1px solid #1f2937" }}>
+          <h2 className="font-semibold text-white">Account Info</h2>
+          <p className="text-xs text-gray-400 mt-0.5">Your current account details</p>
         </div>
-        <div className="divide-y divide-white/[0.05]">
+        <div>
           {[
-            { label: "Name",      value: user?.fullName ?? "—" },
-            { label: "Email",     value: user?.emailAddresses[0]?.emailAddress ?? "—" },
-            { label: "User ID",   value: user?.id ?? "—" },
-            { label: "Verified",  value: user?.emailAddresses[0]?.verification?.status === "verified" ? "✅ Verified" : "❌ Not verified" },
-            { label: "Auth Type", value: user?.externalAccounts?.length ? user.externalAccounts[0].provider : "Email & Password" },
-          ].map((row) => (
-            <div key={row.label} className="flex items-center justify-between px-6 py-3.5">
-              <span className="text-sm text-gray-400">{row.label}</span>
-              <span className="text-sm text-white font-medium truncate max-w-[260px]">{row.value}</span>
+            { label: "Full Name",  value: user?.fullName ?? "—" },
+            { label: "Email",      value: user?.emailAddresses[0]?.emailAddress ?? "—" },
+            { label: "User ID",    value: user?.id ?? "—" },
+            { label: "Verified",   value: user?.emailAddresses[0]?.verification?.status === "verified" ? "✅ Verified" : "❌ Not verified" },
+            { label: "Auth Type",  value: user?.externalAccounts?.length ? user.externalAccounts[0].provider : "Email & Password" },
+          ].map((row, i) => (
+            <div key={row.label} className="flex items-center justify-between px-6 py-4" style={{ borderTop: i === 0 ? "none" : "1px solid #1f2937" }}>
+              <span className="text-sm font-medium text-gray-400">{row.label}</span>
+              <span className="text-sm font-semibold text-white truncate max-w-[260px]">{row.value}</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Clerk profile manager */}
+      {/* Clerk profile */}
       <div className="space-y-3">
-        <h2 className="font-semibold text-white flex items-center gap-2">
-          <span className="text-indigo-400">👤</span> Manage Profile
-        </h2>
-        <p className="text-sm text-gray-400">Update your name, profile picture, password, and connected accounts.</p>
+        <div>
+          <h2 className="font-semibold text-white">Manage Profile</h2>
+          <p className="text-sm text-gray-400 mt-0.5">Update your name, picture, password, and connected accounts.</p>
+        </div>
         <UserProfile />
       </div>
     </div>
