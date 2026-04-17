@@ -41,26 +41,8 @@ export default function PoopleMapPage() {
     }
   }
 
-  const statusBar = (
-    <div className="flex justify-between items-center px-6 py-2 text-xs font-semibold shrink-0" style={{ background: "#15803d", color: "white" }}>
-      <span>9:41</span>
-      <div className="w-24 h-4 rounded-full bg-black/30" />
-      <div className="flex gap-1 items-center">
-        <span>●●●</span>
-        <span>WiFi</span>
-        <span>🔋</span>
-      </div>
-    </div>
-  );
-
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
-      <div
-        className="relative flex flex-col overflow-hidden rounded-[2.5rem] shadow-2xl"
-        style={{ width: 390, height: 844, background: "#f8faf5", border: "8px solid #1f2937" }}
-      >
-        {statusBar}
-
+    <div className="flex flex-col h-dvh w-full bg-[#f8faf5]">
         <div className="flex-1 overflow-hidden flex flex-col relative">
           {/* Map (always mounted to preserve state) */}
           <div className={`absolute inset-0 flex flex-col ${screen === "map" ? "z-10" : "z-0 pointer-events-none"}`}>
@@ -99,7 +81,6 @@ export default function PoopleMapPage() {
         </div>
 
         <BottomNav active={tab} onChange={handleTabChange} />
-      </div>
     </div>
   );
 }
