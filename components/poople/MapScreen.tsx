@@ -32,10 +32,12 @@ export default function MapScreen({
   onSelect,
   onNotifOpen,
   unreadCount,
+  onFindNearby,
 }: {
   onSelect: (t: Toilet) => void;
   onNotifOpen: () => void;
   unreadCount: number;
+  onFindNearby?: () => void;
 }) {
   const [filter, setFilter] = useState<Filter>("All");
   const [mapExpanded, setMapExpanded] = useState(false);
@@ -86,11 +88,21 @@ export default function MapScreen({
             )}
           </button>
         </div>
-        {/* Search bar */}
-        <div className="flex items-center gap-2 bg-white rounded-2xl px-4 py-3 mb-1">
-          <span className="text-gray-400 text-lg">🔍</span>
-          <span className="text-gray-400 text-base flex-1">Search restrooms near you...</span>
-          <span className="text-sm font-semibold px-3 py-1 rounded-full" style={{ background: "#dcfce7", color: "#15803d" }}>Near Me</span>
+        {/* Search + Find Nearby */}
+        <div className="flex gap-2 mb-1">
+          <div className="flex-1 flex items-center gap-2 bg-white rounded-2xl px-4 py-3">
+            <span className="text-gray-400 text-lg">🔍</span>
+            <span className="text-gray-400 text-base flex-1">Search restrooms...</span>
+          </div>
+          {onFindNearby && (
+            <button
+              onClick={onFindNearby}
+              className="md:hidden shrink-0 flex items-center gap-1.5 px-4 py-3 rounded-2xl font-bold text-sm text-white active:scale-95 transition-transform"
+              style={{ background: "linear-gradient(135deg, #f97316, #ea580c)" }}
+            >
+              📍 Nearby
+            </button>
+          )}
         </div>
       </div>
 
