@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 import DashboardNav from "@/components/dashboard-nav";
+import Chatbot from "@/components/chatbot";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { userId } = await auth();
@@ -16,8 +17,17 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <aside className="w-64 shrink-0 flex flex-col" style={{ background: "#0d1117", borderRight: "1px solid #1f2937" }}>
         {/* Logo */}
         <div className="h-16 flex items-center px-5" style={{ borderBottom: "1px solid #1f2937" }}>
-          <Link href="/" className="text-xl font-bold text-white tracking-tight">
-            Playground<span className="text-indigo-400">.</span>
+          <Link href="/" className="flex items-center gap-2.5">
+            <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+              <path d="M6 8h16l-4 5H6V8z" fill="#22c55e" />
+              <path d="M6 14h10l-4 5H6v-5z" fill="#22c55e" opacity="0.7" />
+              <path d="M6 20h6l-4 5H6v-5z" fill="#22c55e" opacity="0.4" />
+              <path d="M10 28l8-10h6l-8 10h-6z" fill="#7c3aed" />
+            </svg>
+            <div className="flex flex-col leading-tight">
+              <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#22c55e" }}>Eplayment</span>
+              <span className="text-sm font-bold text-white">AI Onboarding</span>
+            </div>
           </Link>
         </div>
 
@@ -66,6 +76,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
           {children}
         </main>
       </div>
+
+      <Chatbot />
     </div>
   );
 }

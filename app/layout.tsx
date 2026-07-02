@@ -10,8 +10,8 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Playground App",
-  description: "A Next.js playground with authentication",
+  title: "Eplayment AI Onboarding",
+  description: "Your guide to safe, effective AI adoption at Eplayment.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -20,9 +20,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       appearance={{
         baseTheme: dark,
         variables: {
-          colorPrimary: "#6366f1",
-          colorBackground: "#111827",
-          colorInputBackground: "#1f2937",
+          colorPrimary: "#22c55e",
+          colorBackground: "#0d1117",
+          colorInputBackground: "#111827",
           colorInputText: "#f9fafb",
           colorText: "#f9fafb",
           colorTextSecondary: "#d1d5db",
@@ -41,16 +41,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dividerText: "!text-gray-400",
           formFieldLabel: "!text-gray-200 !font-medium",
           formFieldInput: "!bg-gray-800 !border-gray-600 !text-white placeholder:!text-gray-500 focus:!border-indigo-500",
-          formButtonPrimary: "!bg-indigo-600 hover:!bg-indigo-500 !text-white !font-semibold",
+          formButtonPrimary: "!bg-green-600 hover:!bg-green-500 !text-white !font-semibold",
           footerActionText: "!text-gray-400",
-          footerActionLink: "!text-indigo-400 hover:!text-indigo-300 !font-medium",
+          footerActionLink: "!text-green-400 hover:!text-green-300 !font-medium",
           identityPreviewText: "!text-white",
-          identityPreviewEditButtonIcon: "!text-indigo-400",
+          identityPreviewEditButtonIcon: "!text-green-400",
           formFieldSuccessText: "!text-green-400",
           formFieldErrorText: "!text-red-400",
           alertText: "!text-gray-200",
           otpCodeFieldInput: "!bg-gray-800 !border-gray-600 !text-white",
-          formResendCodeLink: "!text-indigo-400",
+          formResendCodeLink: "!text-green-400",
         },
       }}
     >
