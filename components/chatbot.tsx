@@ -64,10 +64,10 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating button */}
+      {/* Floating button — above mobile nav */}
       <button
         onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 active:scale-95"
+        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 active:scale-95"
         style={{ background: "linear-gradient(135deg, #22c55e, #16a34a)", boxShadow: "0 0 24px rgba(34,197,94,0.4)" }}
         aria-label="Open AI assistant"
       >
@@ -85,11 +85,11 @@ export default function Chatbot() {
       {/* Chat panel */}
       {open && (
         <div
-          className="fixed bottom-24 right-6 z-50 w-[360px] flex flex-col rounded-2xl overflow-hidden shadow-2xl"
-          style={{ background: "#0d1117", border: "1px solid #1f2937", height: "480px", boxShadow: "0 25px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(34,197,94,0.1)" }}
+          className="fixed bottom-36 right-4 md:bottom-24 md:right-6 z-50 w-[calc(100vw-32px)] max-w-[360px] flex flex-col rounded-2xl overflow-hidden shadow-2xl"
+          style={{ background: "var(--bg2)", border: "1px solid var(--border)", height: "440px", boxShadow: "0 25px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(34,197,94,0.1)" }}
         >
           {/* Header */}
-          <div className="flex items-center gap-3 px-4 py-3.5" style={{ background: "#080c14", borderBottom: "1px solid #1f2937" }}>
+          <div className="flex items-center gap-3 px-4 py-3.5" style={{ background: "var(--bg3)", borderBottom: "1px solid var(--border)" }}>
             <div className="w-8 h-8 rounded-full flex items-center justify-center"
               style={{ background: "linear-gradient(135deg, #22c55e, #16a34a)" }}>
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,12 +97,12 @@ export default function Chatbot() {
               </svg>
             </div>
             <div>
-              <p className="text-sm font-semibold text-white">AI Onboarding Assistant</p>
-              <p className="text-xs text-gray-500">Powered by Claude</p>
+              <p className="text-sm font-semibold" style={{ color: "var(--text)" }}>AI Onboarding Assistant</p>
+              <p className="text-xs" style={{ color: "var(--text3)" }}>Powered by Claude</p>
             </div>
             <div className="ml-auto flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-xs text-green-400">Online</span>
+              <span className="text-xs text-green-500">Online</span>
             </div>
           </div>
 
@@ -112,19 +112,19 @@ export default function Chatbot() {
               <div className="h-full flex flex-col items-center justify-center text-center px-4 space-y-3">
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center"
                   style={{ background: "rgba(34,197,94,0.1)" }}>
-                  <svg className="w-6 h-6" style={{ color: "#22c55e" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">How can I help?</p>
-                  <p className="text-xs text-gray-500 mt-1">Ask me anything about AI tools, setup guides, or security at Eplayment.</p>
+                  <p className="text-sm font-semibold" style={{ color: "var(--text)" }}>How can I help?</p>
+                  <p className="text-xs mt-1" style={{ color: "var(--text3)" }}>Ask me anything about AI tools, setup guides, or security at Eplayment.</p>
                 </div>
                 <div className="flex flex-col gap-2 w-full pt-2">
                   {["How do I set up Claude Code?", "What data can I share with AI?", "How do I build an internal bot?"].map((q) => (
                     <button key={q} onClick={() => { setInput(q); inputRef.current?.focus(); }}
-                      className="text-left text-xs px-3 py-2 rounded-lg transition-colors hover:text-white"
-                      style={{ background: "rgba(255,255,255,0.04)", border: "1px solid #1f2937", color: "#9ca3af" }}>
+                      className="text-left text-xs px-3 py-2 rounded-lg transition-colors"
+                      style={{ background: "var(--bg3)", border: "1px solid var(--border)", color: "var(--text2)" }}>
                       {q}
                     </button>
                   ))}
@@ -138,15 +138,15 @@ export default function Chatbot() {
                   className="max-w-[85%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed whitespace-pre-wrap"
                   style={
                     msg.role === "user"
-                      ? { background: "rgba(34,197,94,0.15)", color: "#d1fae5", border: "1px solid rgba(34,197,94,0.2)" }
-                      : { background: "#111827", color: "#e5e7eb", border: "1px solid #1f2937" }
+                      ? { background: "rgba(34,197,94,0.15)", color: "#166534", border: "1px solid rgba(34,197,94,0.2)" }
+                      : { background: "var(--bg3)", color: "var(--text)", border: "1px solid var(--border)" }
                   }
                 >
                   {msg.content || (loading && i === messages.length - 1 ? (
                     <span className="flex gap-1 items-center py-0.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <span className="w-1.5 h-1.5 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: "300ms" }} />
+                      <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ background: "var(--text3)", animationDelay: "0ms" }} />
+                      <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ background: "var(--text3)", animationDelay: "150ms" }} />
+                      <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ background: "var(--text3)", animationDelay: "300ms" }} />
                     </span>
                   ) : "")}
                 </div>
@@ -156,7 +156,7 @@ export default function Chatbot() {
           </div>
 
           {/* Input */}
-          <div className="p-3" style={{ borderTop: "1px solid #1f2937" }}>
+          <div className="p-3" style={{ borderTop: "1px solid var(--border)" }}>
             <form onSubmit={(e) => { e.preventDefault(); send(); }} className="flex gap-2">
               <input
                 ref={inputRef}
@@ -164,8 +164,8 @@ export default function Chatbot() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about AI tools or setup..."
                 disabled={loading}
-                className="flex-1 text-xs px-3.5 py-2.5 rounded-xl outline-none placeholder-gray-600 text-gray-200 disabled:opacity-50"
-                style={{ background: "#1a2030", border: "1px solid #2d3748" }}
+                className="flex-1 text-xs px-3.5 py-2.5 rounded-xl outline-none disabled:opacity-50"
+                style={{ background: "var(--bg3)", border: "1px solid var(--border)", color: "var(--text)" }}
               />
               <button
                 type="submit"

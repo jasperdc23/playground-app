@@ -75,20 +75,17 @@ export default function SignUpPage() {
       </div>
 
       {/* Right — photo panel */}
-      <div className="hidden lg:block flex-1 relative overflow-hidden">
-
-        {/* Photo */}
-        <Image
-          src="/employee-photo.jpg"
-          alt="Employee"
-          fill
-          className="object-cover object-center"
-          priority
-        />
+      <div className="hidden lg:flex flex-1 relative overflow-hidden"
+        style={{
+          backgroundImage: "url('/employee-photo.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+          backgroundColor: "#1a1a2e",
+        }}>
 
         {/* Dark gradient overlay */}
         <div className="absolute inset-0"
-          style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)" }} />
+          style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 100%)" }} />
 
         {/* Top badge */}
         <div className="absolute top-8 left-8 z-10">
