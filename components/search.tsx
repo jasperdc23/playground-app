@@ -9,6 +9,7 @@ const pages = [
   { title: "AI Guidelines", desc: "Company AI usage guidelines", href: "/dashboard/ai-guidelines", tags: "guidelines rules policy" },
   { title: "AI Security", desc: "Security best practices", href: "/dashboard/ai-security", tags: "security privacy data" },
   { title: "Setup Bots", desc: "Build Discord, Slack, Web bots", href: "/dashboard/setup-bots", tags: "bots discord slack" },
+  { title: "AI Initiatives", desc: "Company AI tools and automations being built", href: "/dashboard/ai-initiatives", tags: "initiatives projects tools builds ai company" },
   { title: "Settings", desc: "Account and profile settings", href: "/dashboard/settings", tags: "settings account profile" },
   { title: "Build a Bot", desc: "Step-by-step bot setup guide", href: "/dashboard/tutorial/bots", tags: "bot tutorial guide" },
   { title: "Generate Images", desc: "AI image generation tutorial", href: "/dashboard/tutorial/images", tags: "image generation dalle midjourney" },

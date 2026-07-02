@@ -146,6 +146,27 @@ export default async function DashboardPage() {
         </div>
       </section>
 
+      {/* AI Initiatives promo */}
+      <section>
+        <Link href="/dashboard/ai-initiatives"
+          className="flex items-center gap-5 p-5 rounded-2xl transition-all hover:-translate-y-0.5 hover:shadow-md group"
+          style={{ background: "linear-gradient(135deg, rgba(109,91,208,0.08) 0%, rgba(112,194,80,0.06) 100%)", border: "1px solid rgba(109,91,208,0.2)" }}>
+          <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+            style={{ background: "linear-gradient(135deg, #6D5BD0, #70C250)" }}>
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="font-bold text-sm" style={{ color: "var(--text)" }}>AI Initiatives</p>
+            <p className="text-xs mt-0.5" style={{ color: "var(--text3)" }}>See what the team is building with AI — PIXEL Expert, Design System, Bots & more. Add your own.</p>
+          </div>
+          <svg className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "var(--text3)" }}>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </section>
+
       {/* Tips strip */}
       <section>
         <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text3)" }}>Quick tips</p>
