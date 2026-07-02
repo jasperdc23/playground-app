@@ -180,7 +180,7 @@ export default function Tour() {
 
         {/* Restart tour hint — only shown on last step */}
         {step === steps.length - 1 && (
-          <p className="text-center text-xs mt-2" style={{ color: "rgba(255,255,255,0.4)" }}>
+          <p className="text-center text-xs mt-2" style={{ color: "var(--text3)" }}>
             You can restart the tour anytime from Settings
           </p>
         )}
