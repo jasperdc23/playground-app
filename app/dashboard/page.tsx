@@ -1,67 +1,98 @@
 import { currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
+import TutorialBanner from "@/components/tutorial-banner";
 
-const modules = [
+const goals = [
   {
-    href: "/dashboard/ai-guidelines",
-    title: "AI Guidelines",
-    desc: "Company-wide policies for using AI tools responsibly — what's allowed, what's not, and best practices for every role.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>
-    ),
-    color: "#22c55e",
-    bg: "rgba(34,197,94,0.07)",
-    border: "rgba(34,197,94,0.2)",
-    glow: "rgba(34,197,94,0.15)",
-    steps: ["Usage policies", "Do's and Don'ts", "Data handling", "Approved tools"],
-  },
-  {
-    href: "/dashboard/ai-security",
-    title: "AI Adoption Security",
-    desc: "Security standards for AI integration — data classification, prompt injection risks, credential safety, and audit compliance.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-      </svg>
-    ),
-    color: "#f59e0b",
-    bg: "rgba(245,158,11,0.07)",
-    border: "rgba(245,158,11,0.2)",
-    glow: "rgba(245,158,11,0.15)",
-    steps: ["Data classification", "Prompt injection", "Credential safety", "Incident reporting"],
-  },
-  {
-    href: "/dashboard/setup-bots",
-    title: "How to Setup Bots",
-    desc: "Step-by-step guide to building and deploying Claude-powered internal bots using the Anthropic SDK, tool use, and prompt caching.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
+    href: "/dashboard/tutorial/bots",
+    title: "Build a Bot",
+    sub: "Discord · Slack · Web",
     color: "#818cf8",
-    bg: "rgba(129,140,248,0.07)",
+    bg: "#13152a",
     border: "rgba(129,140,248,0.2)",
-    glow: "rgba(129,140,248,0.15)",
-    steps: ["Get API keys", "Install SDK", "Build with tool use", "Deploy to Slack/web"],
-  },
-  {
-    href: "/dashboard/learn-tools",
-    title: "Learn AI Tools",
-    desc: "Compare and learn Claude, Gemini, ChatGPT, GitHub Copilot, and more — know which tool to use for each task.",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+    illustration: (
+      <svg viewBox="0 0 80 80" fill="none" className="w-full h-full">
+        <circle cx="40" cy="40" r="38" fill="rgba(129,140,248,0.08)" />
+        <rect x="20" y="28" width="40" height="30" rx="8" fill="rgba(129,140,248,0.2)" stroke="#818cf8" strokeWidth="1.5" />
+        <circle cx="32" cy="43" r="4" fill="#818cf8" />
+        <circle cx="48" cy="43" r="4" fill="#818cf8" />
+        <path d="M34 52h12" stroke="#818cf8" strokeWidth="2" strokeLinecap="round" />
+        <path d="M32 28v-6M40 28v-8M48 28v-6" stroke="#818cf8" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="32" cy="20" r="2.5" fill="#818cf8" />
+        <circle cx="40" cy="18" r="2.5" fill="#818cf8" />
+        <circle cx="48" cy="20" r="2.5" fill="#818cf8" />
       </svg>
     ),
-    color: "#e879f9",
-    bg: "rgba(232,121,249,0.07)",
-    border: "rgba(232,121,249,0.2)",
-    glow: "rgba(232,121,249,0.15)",
-    steps: ["Claude (Anthropic)", "Gemini (Google)", "ChatGPT (OpenAI)", "GitHub Copilot"],
   },
+  {
+    href: "/dashboard/tutorial/images",
+    title: "Generate Images",
+    sub: "DALL-E · Midjourney · Firefly",
+    color: "#f472b6",
+    bg: "#1a1020",
+    border: "rgba(244,114,182,0.2)",
+    illustration: (
+      <svg viewBox="0 0 80 80" fill="none" className="w-full h-full">
+        <circle cx="40" cy="40" r="38" fill="rgba(244,114,182,0.08)" />
+        <rect x="16" y="22" width="48" height="36" rx="6" fill="rgba(244,114,182,0.15)" stroke="#f472b6" strokeWidth="1.5" />
+        <circle cx="30" cy="33" r="5" fill="rgba(244,114,182,0.3)" stroke="#f472b6" strokeWidth="1.2" />
+        <path d="M16 48l14-10 10 8 8-6 14 10" stroke="#f472b6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M52 22l6-6M60 22l-2-4" stroke="#f472b6" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="54" cy="16" r="3" fill="#f472b6" opacity="0.5" />
+      </svg>
+    ),
+  },
+  {
+    href: "/dashboard/tutorial/code",
+    title: "Code with AI",
+    sub: "Claude Code · Copilot · Cursor",
+    color: "#4ade80",
+    bg: "#0f1a12",
+    border: "rgba(74,222,128,0.2)",
+    illustration: (
+      <svg viewBox="0 0 80 80" fill="none" className="w-full h-full">
+        <circle cx="40" cy="40" r="38" fill="rgba(74,222,128,0.08)" />
+        <rect x="14" y="20" width="52" height="40" rx="6" fill="rgba(74,222,128,0.1)" stroke="#4ade80" strokeWidth="1.5" />
+        <rect x="14" y="20" width="52" height="10" rx="6" fill="rgba(74,222,128,0.2)" />
+        <circle cx="21" cy="25" r="2" fill="#4ade80" opacity="0.6" />
+        <circle cx="28" cy="25" r="2" fill="#f59e0b" opacity="0.6" />
+        <circle cx="35" cy="25" r="2" fill="#f472b6" opacity="0.6" />
+        <path d="M22 40l-6 5 6 5" stroke="#4ade80" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M34 38l4 14" stroke="#4ade80" strokeWidth="1.8" strokeLinecap="round" opacity="0.6" />
+        <path d="M42 40l6 5-6 5" stroke="#4ade80" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    href: "/dashboard/tutorial/howto",
+    title: "How-to Guides",
+    sub: "Step-by-step for any task",
+    color: "#fbbf24",
+    bg: "#1a1608",
+    border: "rgba(251,191,36,0.2)",
+    illustration: (
+      <svg viewBox="0 0 80 80" fill="none" className="w-full h-full">
+        <circle cx="40" cy="40" r="38" fill="rgba(251,191,36,0.08)" />
+        <rect x="22" y="16" width="36" height="48" rx="6" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" strokeWidth="1.5" />
+        <path d="M30 28h20M30 35h20M30 42h14" stroke="#fbbf24" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="52" cy="56" r="10" fill="#1a1608" stroke="#fbbf24" strokeWidth="1.5" />
+        <path d="M52 51v6l3 3" stroke="#fbbf24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+];
+
+const tools = [
+  { name: "Claude", maker: "Anthropic", color: "#e97317", href: "/dashboard/claude-code", emoji: "🟠", desc: "Reasoning & code" },
+  { name: "Gemini", maker: "Google", color: "#4285f4", href: "/dashboard/gemini", emoji: "🔵", desc: "Large context" },
+  { name: "ChatGPT", maker: "OpenAI", color: "#10a37f", href: "/dashboard/learn-tools", emoji: "🟢", desc: "General tasks" },
+  { name: "Copilot", maker: "GitHub", color: "#6e40c9", href: "/dashboard/copilot", emoji: "🟣", desc: "IDE coding" },
+];
+
+const tips = [
+  { icon: "🔒", text: "Never share passwords or customer data with any AI tool.", color: "#fbbf24" },
+  { icon: "✅", text: "Always review AI output before using it in production.", color: "#4ade80" },
+  { icon: "💡", text: "Use Claude for complex reasoning, Copilot for quick completions.", color: "#818cf8" },
 ];
 
 export default async function DashboardPage() {
@@ -69,75 +100,77 @@ export default async function DashboardPage() {
   const name = user?.firstName ?? "there";
 
   return (
-    <div className="max-w-5xl space-y-10">
+    <div className="p-6 space-y-8 max-w-5xl mx-auto">
 
       {/* Welcome */}
-      <div className="space-y-1">
-        <p className="text-sm font-medium" style={{ color: "#22c55e" }}>Good day, {name} 👋</p>
-        <h1 className="text-3xl font-bold text-white">AI Learning Dashboard</h1>
-        <p className="text-gray-400 text-sm">Pick a module below to get started with AI at Eplayment.</p>
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Hey, {name} 👋</h1>
+          <p className="text-gray-500 text-sm mt-0.5">What do you want to do with AI today?</p>
+        </div>
       </div>
 
-      {/* Stats bar */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {[
-          { label: "Modules", value: "4", color: "#22c55e" },
-          { label: "AI Tools Covered", value: "6+", color: "#818cf8" },
-          { label: "Security Topics", value: "6", color: "#f59e0b" },
-          { label: "Setup Guides", value: "12+", color: "#e879f9" },
-        ].map((s) => (
-          <div key={s.label} className="rounded-xl p-4" style={{ background: "#0d1117", border: "1px solid #1f2937" }}>
-            <p className="text-2xl font-bold" style={{ color: s.color }}>{s.value}</p>
-            <p className="text-xs text-gray-500 mt-0.5">{s.label}</p>
-          </div>
-        ))}
-      </div>
+      {/* Tutorial banner — shows once */}
+      <TutorialBanner />
 
-      {/* Module blocks */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        {modules.map((mod) => (
-          <Link
-            key={mod.href}
-            href={mod.href}
-            className="group relative rounded-2xl p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-            style={{ background: mod.bg, border: `1px solid ${mod.border}` }}
-          >
-            {/* Glow on hover */}
-            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-              style={{ boxShadow: `0 0 40px ${mod.glow}` }} />
-
-            {/* Icon + arrow */}
-            <div className="flex items-start justify-between">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                style={{ background: `${mod.color}18`, color: mod.color }}>
-                {mod.icon}
+      {/* Goal cards */}
+      <section>
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Choose a goal</p>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {goals.map((g) => (
+            <Link key={g.href} href={g.href}
+              className="group rounded-2xl p-5 flex flex-col gap-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl"
+              style={{ background: g.bg, border: `1px solid ${g.border}` }}>
+              <div className="w-16 h-16">
+                {g.illustration}
               </div>
-              <div className="w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0"
-                style={{ background: `${mod.color}20`, color: mod.color }}>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div>
+                <p className="font-semibold text-white text-sm">{g.title}</p>
+                <p className="text-[11px] text-gray-500 mt-0.5">{g.sub}</p>
+              </div>
+              <div className="flex items-center gap-1 text-[11px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{ color: g.color }}>
+                Start learning
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </div>
-            </div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
-            {/* Text */}
-            <div>
-              <h3 className="text-lg font-bold text-white">{mod.title}</h3>
-              <p className="text-sm text-gray-400 mt-1.5 leading-relaxed">{mod.desc}</p>
-            </div>
+      {/* AI Tools quick pick */}
+      <section>
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Pick your AI tool</p>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {tools.map((t) => (
+            <Link key={t.name} href={t.href}
+              className="group flex items-center gap-3 p-4 rounded-xl transition-all duration-150 hover:scale-[1.02]"
+              style={{ background: "#0d1117", border: "1px solid #1a2030" }}>
+              <span className="text-2xl">{t.emoji}</span>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-white truncate">{t.name}</p>
+                <p className="text-[11px] text-gray-500">{t.desc}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
-            {/* Topic pills */}
-            <div className="flex flex-wrap gap-1.5 mt-auto">
-              {mod.steps.map((s) => (
-                <span key={s} className="text-[11px] px-2.5 py-1 rounded-full font-medium"
-                  style={{ background: `${mod.color}12`, color: mod.color, border: `1px solid ${mod.color}25` }}>
-                  {s}
-                </span>
-              ))}
+      {/* Tips strip */}
+      <section>
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Quick tips</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {tips.map((tip) => (
+            <div key={tip.text} className="flex items-start gap-3 p-4 rounded-xl"
+              style={{ background: "#0d1117", border: "1px solid #1a2030" }}>
+              <span className="text-lg shrink-0">{tip.icon}</span>
+              <p className="text-xs text-gray-400 leading-relaxed">{tip.text}</p>
             </div>
-          </Link>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
 
     </div>
   );

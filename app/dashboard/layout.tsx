@@ -1,78 +1,75 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
-import DashboardNav from "@/components/dashboard-nav";
+import SidebarNav from "@/components/sidebar-nav";
 import Chatbot from "@/components/chatbot";
+import Image from "next/image";
+import Link from "next/link";
+import fs from "fs";
+import path from "path";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { userId } = await auth();
   if (!userId) redirect("/sign-in");
 
   const user = await currentUser();
+  const hasLogo = fs.existsSync(path.join(process.cwd(), "public", "logo.png"));
 
   return (
-    <div className="min-h-screen flex" style={{ background: "#030712" }}>
+    <div className="min-h-screen flex" style={{ background: "#0a0c12" }}>
+
       {/* Sidebar */}
-      <aside className="w-64 shrink-0 flex flex-col" style={{ background: "#0d1117", borderRight: "1px solid #1f2937" }}>
-        {/* Logo */}
-        <div className="h-16 flex items-center px-5" style={{ borderBottom: "1px solid #1f2937" }}>
-          <Link href="/" className="flex items-center gap-2.5">
-            <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
-              <path d="M6 8h16l-4 5H6V8z" fill="#22c55e" />
-              <path d="M6 14h10l-4 5H6v-5z" fill="#22c55e" opacity="0.7" />
-              <path d="M6 20h6l-4 5H6v-5z" fill="#22c55e" opacity="0.4" />
+      <aside className="w-[72px] shrink-0 flex flex-col items-center py-4 gap-2 z-20"
+        style={{ background: "#0d1117", borderRight: "1px solid #1a2030" }}>
+
+        {/* Logo mark */}
+        <Link href="/dashboard" className="mb-3 flex items-center justify-center w-10 h-10">
+          {hasLogo ? (
+            <Image src="/logo.png" alt="Eplayment" width={36} height={36} className="object-contain" />
+          ) : (
+            <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+              <path d="M6 8h16l-4 5H6V8z" fill="#4ade80" />
+              <path d="M6 14h10l-4 5H6v-5z" fill="#4ade80" opacity="0.7" />
+              <path d="M6 20h6l-4 5H6v-5z" fill="#4ade80" opacity="0.4" />
               <path d="M10 28l8-10h6l-8 10h-6z" fill="#7c3aed" />
             </svg>
-            <div className="flex flex-col leading-tight">
-              <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#22c55e" }}>Eplayment</span>
-              <span className="text-sm font-bold text-white">AI Onboarding</span>
-            </div>
-          </Link>
-        </div>
+          )}
+        </Link>
 
-        {/* Nav */}
-        <nav className="flex-1 p-3">
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest px-3 mb-2">Menu</p>
-          <DashboardNav />
-        </nav>
+        <SidebarNav />
 
-        {/* User */}
-        <div className="p-3" style={{ borderTop: "1px solid #1f2937" }}>
-          <div className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/[0.05] transition-colors">
-            <UserButton />
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-white truncate">
-                {user?.fullName ?? user?.firstName ?? "User"}
-              </p>
-              <p className="text-xs text-gray-400 truncate">
-                {user?.emailAddresses[0]?.emailAddress}
-              </p>
-            </div>
-          </div>
+        {/* User at bottom */}
+        <div className="mt-auto pt-2">
+          <UserButton />
         </div>
       </aside>
 
       {/* Main */}
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Header */}
-        <header className="h-16 flex items-center justify-between px-8" style={{ background: "#0a0f1a", borderBottom: "1px solid #1f2937" }}>
-          <div>
-            <p className="text-sm font-semibold text-white">
-              Welcome back, {user?.firstName ?? "User"}
-            </p>
-            <p className="text-xs text-gray-400">
-              {new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
-            </p>
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Top bar */}
+        <header className="h-14 flex items-center justify-between px-6 shrink-0"
+          style={{ background: "#0d1117", borderBottom: "1px solid #1a2030" }}>
+          <div className="flex items-center gap-3">
+            {hasLogo ? (
+              <Image src="/logo.png" alt="Eplayment" width={120} height={28} className="object-contain" />
+            ) : (
+              <span className="font-bold text-white text-sm tracking-wide">
+                E<span style={{ color: "#4ade80" }}>PLAYMENT</span>
+                <span className="text-gray-500 font-normal ml-2 text-xs">AI Hub</span>
+              </span>
+            )}
           </div>
-          <div className="flex items-center gap-2 bg-green-400/10 border border-green-400/20 rounded-full px-3 py-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-xs font-medium text-green-400">Connected</span>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium"
+              style={{ background: "rgba(74,222,128,0.1)", border: "1px solid rgba(74,222,128,0.2)", color: "#4ade80" }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              {user?.firstName ?? "User"}
+            </div>
           </div>
         </header>
 
         {/* Content */}
-        <main className="flex-1 p-8 overflow-auto">
+        <main className="flex-1 overflow-auto">
           {children}
         </main>
       </div>

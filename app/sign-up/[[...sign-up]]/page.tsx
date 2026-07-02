@@ -79,6 +79,13 @@ export default function SignUpPage() {
 }
 
 function EplaymentLogo() {
+  const fs = require("fs");
+  const path = require("path");
+  const hasLogo = fs.existsSync(path.join(process.cwd(), "public", "logo.png"));
+  if (hasLogo) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src="/logo.png" alt="Eplayment" className="h-10 w-auto object-contain" />;
+  }
   return (
     <div className="flex items-center gap-3">
       <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
@@ -87,9 +94,7 @@ function EplaymentLogo() {
         <path d="M6 20h6l-4 5H6v-5z" fill="#22c55e" opacity="0.4" />
         <path d="M10 28l8-10h6l-8 10h-6z" fill="#7c3aed" />
       </svg>
-      <div>
-        <span className="text-xl font-bold tracking-tight text-white">E<span style={{ color: "#22c55e" }}>PLAYMENT</span></span>
-      </div>
+      <span className="text-xl font-bold tracking-tight text-white">E<span style={{ color: "#22c55e" }}>PLAYMENT</span></span>
     </div>
   );
 }
