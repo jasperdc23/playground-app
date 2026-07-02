@@ -81,7 +81,7 @@ export default async function DashboardPage() {
   const name = user?.firstName ?? "there";
 
   return (
-    <div className="p-6 space-y-8 max-w-5xl mx-auto">
+    <div className="p-6 space-y-8 w-full">
 
       {/* Welcome */}
       <div className="flex items-start justify-between">
@@ -97,7 +97,7 @@ export default async function DashboardPage() {
       {/* Goal cards */}
       <section>
         <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text3)" }}>Choose a goal</p>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {goals.map((g) => (
             <Link key={g.href} href={g.href}
               className="group rounded-2xl p-5 flex flex-col gap-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
@@ -128,7 +128,7 @@ export default async function DashboardPage() {
       {/* AI Tools quick pick */}
       <section>
         <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text3)" }}>Pick your AI tool</p>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {tools.map((t) => (
             <Link key={t.name} href={t.href}
               className="group flex items-center gap-3 p-4 rounded-xl transition-all duration-150 hover:scale-[1.02]"
@@ -149,7 +149,7 @@ export default async function DashboardPage() {
       {/* Tips strip */}
       <section>
         <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text3)" }}>Quick tips</p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-3 gap-3">
           {tips.map((tip) => (
             <div key={tip.text} className="flex items-start gap-3 p-4 rounded-xl"
               style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}>

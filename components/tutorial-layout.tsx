@@ -19,7 +19,9 @@ interface TutorialLayoutProps {
 
 export default function TutorialLayout({ title, subtitle, color, steps, tools, nextHref, nextLabel }: TutorialLayoutProps) {
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-8">
+    <div className="w-full p-6">
+    <div className="flex gap-8">
+    <div className="flex-1 min-w-0 space-y-8">
 
       {/* Back */}
       <Link href="/dashboard" className="inline-flex items-center gap-1.5 text-xs transition-colors"
@@ -109,6 +111,36 @@ export default function TutorialLayout({ title, subtitle, color, steps, tools, n
         </div>
       )}
 
+    </div>{/* end flex-1 */}
+
+    {/* Right sidebar */}
+    <aside className="hidden xl:flex flex-col gap-4 w-60 shrink-0 pt-16">
+
+      {/* Tools */}
+      <div className="rounded-2xl p-4 sticky top-6" style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}>
+        <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "var(--text3)" }}>Recommended tools</p>
+        <div className="space-y-1">
+          {tools.map((t) => (
+            <Link key={t.name} href={t.href}
+              className="flex items-center gap-2 py-1.5 px-2 rounded-lg transition-colors hover:bg-[var(--bg3)]">
+              <span className="text-base">{t.emoji}</span>
+              <span className="text-xs font-medium" style={{ color: "var(--text2)" }}>{t.name}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Ask AI */}
+      <div className="rounded-2xl p-4" style={{ background: "rgba(112,194,80,0.07)", border: "1px solid rgba(112,194,80,0.2)" }}>
+        <p className="text-xs font-semibold mb-1" style={{ color: "#70C250" }}>💬 Need help?</p>
+        <p className="text-xs leading-relaxed" style={{ color: "var(--text2)" }}>
+          Ask the AI assistant at the bottom right for step-by-step help.
+        </p>
+      </div>
+
+    </aside>
+
+    </div>{/* end flex row */}
     </div>
   );
 }
