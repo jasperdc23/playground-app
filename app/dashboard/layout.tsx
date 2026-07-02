@@ -21,8 +21,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <aside className="w-20 shrink-0 flex flex-col items-center py-5 gap-3 z-20"
         style={{ background: "var(--bg2)", borderRight: "1px solid var(--border)" }}>
 
-        {/* EP Logomark — bigger */}
-        <Link href="/dashboard" className="mb-4 flex items-center justify-center w-12 h-12 p-1">
+        {/* EP Logomark */}
+        <Link href="/dashboard" className="mb-4 flex items-center justify-center" style={{ width: 44, height: 44 }}>
           <Image src="/ep-logomark.svg" alt="Eplayment" width={44} height={44} className="object-contain" />
         </Link>
 
@@ -41,7 +41,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
         <header className="h-14 flex items-center justify-between px-8 shrink-0"
           style={{ background: "var(--bg2)", borderBottom: "1px solid var(--border)" }}>
           <div className="flex items-center gap-3">
-            <Image src="/eplayment-logo.svg" alt="Eplayment" width={140} height={20} className="object-contain" />
+            <Image src="/eplayment-logo.svg" alt="Eplayment" width={140} height={20} className="object-contain ep-logo-themed" />
           </div>
           <div className="flex items-center gap-3">
             <span className="text-sm font-medium" style={{ color: "var(--text3)" }}>
