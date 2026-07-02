@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 import SidebarNav from "@/components/sidebar-nav";
 import Chatbot from "@/components/chatbot";
+import ThemeToggle from "@/components/theme-toggle";
+import Tour from "@/components/tour";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,50 +13,52 @@ export default async function DashboardLayout({ children }: { children: React.Re
   if (!userId) redirect("/sign-in");
 
   const user = await currentUser();
+
   return (
-    <div className="min-h-screen flex" style={{ background: "#0a0c12" }}>
+    <div className="min-h-screen flex" style={{ background: "var(--bg)" }}>
 
       {/* Sidebar */}
-      <aside className="w-[72px] shrink-0 flex flex-col items-center py-4 gap-2 z-20"
-        style={{ background: "#0d1117", borderRight: "1px solid #1a2030" }}>
+      <aside className="w-20 shrink-0 flex flex-col items-center py-5 gap-3 z-20"
+        style={{ background: "var(--bg2)", borderRight: "1px solid var(--border)" }}>
 
-        {/* Logo mark */}
-        <Link href="/dashboard" className="mb-3 flex items-center justify-center w-10 h-10">
-          <Image src="/eplayment-logo.svg" alt="Eplayment" width={28} height={28} className="object-contain" />
+        {/* EP Logomark — bigger */}
+        <Link href="/dashboard" className="mb-4 flex items-center justify-center w-12 h-12 p-1">
+          <Image src="/ep-logomark.svg" alt="Eplayment" width={44} height={44} className="object-contain" />
         </Link>
 
         <SidebarNav />
 
-        {/* User at bottom */}
-        <div className="mt-auto pt-2">
+        <div className="mt-auto flex flex-col items-center gap-3 pb-1">
+          <ThemeToggle />
           <UserButton />
         </div>
       </aside>
 
       {/* Main */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+
         {/* Top bar */}
-        <header className="h-14 flex items-center justify-between px-6 shrink-0"
-          style={{ background: "#0d1117", borderBottom: "1px solid #1a2030" }}>
+        <header className="h-14 flex items-center justify-between px-8 shrink-0"
+          style={{ background: "var(--bg2)", borderBottom: "1px solid var(--border)" }}>
           <div className="flex items-center gap-3">
-            <Image src="/eplayment-logo.svg" alt="Eplayment" width={130} height={18} className="object-contain" />
+            <Image src="/eplayment-logo.svg" alt="Eplayment" width={140} height={20} className="object-contain" />
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium"
-              style={{ background: "rgba(74,222,128,0.1)", border: "1px solid rgba(74,222,128,0.2)", color: "#4ade80" }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+            <span className="text-sm font-medium" style={{ color: "var(--text3)" }}>
               {user?.firstName ?? "User"}
-            </div>
+            </span>
+            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" title="Connected" />
           </div>
         </header>
 
-        {/* Content */}
-        <main className="flex-1 overflow-auto">
+        {/* Content — proper padding */}
+        <main className="flex-1 overflow-auto p-8">
           {children}
         </main>
       </div>
 
       <Chatbot />
+      <Tour />
     </div>
   );
 }

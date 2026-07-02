@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -55,8 +56,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       }}
     >
       <html lang="en" className={`${geist.variable} h-full antialiased`}>
-        <body className="min-h-full flex flex-col bg-gray-950 text-white">
-          {children}
+        <body className="min-h-full flex flex-col">
+          <ThemeProvider>{children}</ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

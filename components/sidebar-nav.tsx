@@ -75,15 +75,15 @@ export default function SidebarNav() {
             title={item.label}
             className="w-full flex flex-col items-center gap-1 py-2.5 px-1 rounded-xl transition-all duration-150 group"
             style={active
-              ? { background: "rgba(74,222,128,0.12)", color: "#4ade80" }
-              : { color: "#4b5563" }
+              ? { background: "rgba(112,194,80,0.15)", color: "#70C250" }
+              : { color: "var(--text3)" }
             }
           >
-            <span className="group-hover:text-white transition-colors" style={active ? { color: "#4ade80" } : {}}>
+            <span className="transition-colors" style={active ? { color: "#70C250" } : {}}>
               {item.icon}
             </span>
-            <span className="text-[9px] font-semibold uppercase tracking-wider leading-none group-hover:text-gray-300 transition-colors"
-              style={active ? { color: "#4ade80" } : {}}>
+            <span className="text-[9px] font-semibold uppercase tracking-wider leading-none transition-colors"
+              style={active ? { color: "#70C250" } : {}}>
               {item.label}
             </span>
           </Link>

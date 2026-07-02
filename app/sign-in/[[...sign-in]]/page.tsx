@@ -27,15 +27,9 @@ export default function SignInPage() {
       <div className="flex-1 flex flex-col px-10 py-8 max-w-[560px] min-h-screen">
 
         {/* Logo */}
-        <div className="mb-10">
-          <Image
-            src="/eplayment-logo.svg"
-            alt="Eplayment"
-            width={160}
-            height={22}
-            className="object-contain"
-            style={{ filter: "invert(0)" }}
-          />
+        <div className="mb-10 flex items-center gap-3">
+          <Image src="/ep-logomark.svg" alt="Eplayment" width={36} height={36} className="object-contain" />
+          <Image src="/eplayment-logo.svg" alt="Eplayment" width={130} height={18} className="object-contain" style={{ filter: "invert(1) brightness(0)" }} />
         </div>
 
         {/* Heading */}
