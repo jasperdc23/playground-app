@@ -210,9 +210,10 @@ export default function AIInitiativesPage() {
       </div>
 
       {/* Filters + search */}
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="rounded-2xl p-4 space-y-4" style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}>
+
         {/* Search */}
-        <div className="flex items-center gap-2 flex-1 px-3 py-2 rounded-xl" style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}>
+        <div className="flex items-center gap-2 px-3 py-2 rounded-xl" style={{ background: "var(--bg3)", border: "1px solid var(--border)" }}>
           <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "var(--text3)" }}>
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
@@ -222,31 +223,66 @@ export default function AIInitiativesPage() {
             style={{ color: "var(--text)" }} />
         </div>
 
+        <div style={{ borderTop: "1px solid var(--border)", margin: "0 -4px" }} />
+
         {/* Platform filter */}
-        <div className="flex gap-1.5 flex-wrap">
-          {(["All", ...PLATFORMS] as const).map(p => (
-            <button key={p} onClick={() => setFilter(p)}
+        <div>
+          <p className="text-[10px] font-bold uppercase tracking-widest mb-2.5" style={{ color: "var(--text3)" }}>AI Platform</p>
+          <div className="flex gap-2 flex-wrap">
+            <button onClick={() => setFilter("All")}
               className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
-              style={filter === p
+              style={filter === "All"
                 ? { background: "#6D5BD0", color: "white" }
-                : { background: "var(--bg2)", color: "var(--text3)", border: "1px solid var(--border)" }}>
-              {p}
+                : { background: "var(--bg3)", color: "var(--text3)", border: "1px solid var(--border)" }}>
+              All platforms
             </button>
-          ))}
+            {PLATFORMS.map(p => {
+              const pc = PLATFORM_CONFIG[p];
+              const active = filter === p;
+              return (
+                <button key={p} onClick={() => setFilter(p)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
+                  style={active
+                    ? { background: pc.bg, color: pc.color, border: `1px solid ${pc.color}40` }
+                    : { background: "var(--bg3)", color: "var(--text3)", border: "1px solid var(--border)" }}>
+                  <span className="w-2 h-2 rounded-full shrink-0" style={{ background: pc.color }} />
+                  {p}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
+        <div style={{ borderTop: "1px solid var(--border)", margin: "0 -4px" }} />
+
         {/* Status filter */}
-        <div className="flex gap-1.5 flex-wrap">
-          {(["All", ...STATUSES] as const).map(s => (
-            <button key={s} onClick={() => setStatus(s)}
+        <div>
+          <p className="text-[10px] font-bold uppercase tracking-widest mb-2.5" style={{ color: "var(--text3)" }}>Status</p>
+          <div className="flex gap-2 flex-wrap">
+            <button onClick={() => setStatus("All")}
               className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
-              style={statusFilter === s
-                ? { background: STATUS_CONFIG[s as Status]?.color ?? "#6D5BD0", color: "white" }
-                : { background: "var(--bg2)", color: "var(--text3)", border: "1px solid var(--border)" }}>
-              {s}
+              style={statusFilter === "All"
+                ? { background: "#6D5BD0", color: "white" }
+                : { background: "var(--bg3)", color: "var(--text3)", border: "1px solid var(--border)" }}>
+              All statuses
             </button>
-          ))}
+            {STATUSES.map(s => {
+              const sc = STATUS_CONFIG[s];
+              const active = statusFilter === s;
+              return (
+                <button key={s} onClick={() => setStatus(s)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
+                  style={active
+                    ? { background: sc.bg, color: sc.color, border: `1px solid ${sc.dot}40` }
+                    : { background: "var(--bg3)", color: "var(--text3)", border: "1px solid var(--border)" }}>
+                  <span className="w-2 h-2 rounded-full shrink-0" style={{ background: sc.dot, ...(s === "Live" ? { boxShadow: `0 0 5px ${sc.dot}` } : {}) }} />
+                  {s}
+                </button>
+              );
+            })}
+          </div>
         </div>
+
       </div>
 
       {/* Cards grid */}
