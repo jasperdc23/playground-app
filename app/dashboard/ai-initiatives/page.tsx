@@ -136,6 +136,7 @@ export default function AIInitiativesPage() {
   const [form, setForm]           = useState(BLANK);
   const [saving, setSaving]       = useState(false);
   const [viewItem, setViewItem]   = useState<Initiative | null>(null);
+  const [toast, setToast]         = useState<string | null>(null);
 
   useEffect(() => { setItems(load()); }, []);
 
@@ -159,6 +160,8 @@ export default function AIInitiativesPage() {
       setModal(false);
       setForm(BLANK);
       setSaving(false);
+      setToast(form.name);
+      setTimeout(() => setToast(null), 3500);
     }, 400);
   }
 
@@ -511,6 +514,31 @@ export default function AIInitiativesPage() {
         </div>
       </Portal>
       )}
+
+      {/* ── Snackbar ───────────────────────────────────────── */}
+      <Portal>
+        <div
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999] transition-all duration-300"
+          style={{
+            transform: `translateX(-50%) translateY(${toast ? "0" : "120%"})`,
+            opacity: toast ? 1 : 0,
+            pointerEvents: toast ? "auto" : "none",
+          }}>
+          <div className="flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl"
+            style={{ background: "#1a1a2e", border: "1px solid rgba(112,194,80,0.3)", minWidth: 260 }}>
+            <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
+              style={{ background: "rgba(112,194,80,0.15)" }}>
+              <svg className="w-3.5 h-3.5" fill="none" stroke="#70C250" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-white truncate">{toast} added!</p>
+              <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.5)" }}>Initiative is now live on the board.</p>
+            </div>
+          </div>
+        </div>
+      </Portal>
 
     </div>
   );
