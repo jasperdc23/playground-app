@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 
 type Status = "Live" | "Beta" | "In Progress" | "Planned";
@@ -103,6 +104,13 @@ const STATUSES: Status[]      = ["Live", "Beta", "In Progress", "Planned"];
 const CATEGORIES: Category[]  = ["Product", "Dev Tools", "Design", "Operations", "Security", "HR & Admin", "Marketing"];
 
 const STORAGE_KEY = "ep_ai_initiatives";
+
+function Portal({ children }: { children: React.ReactNode }) {
+  const ref = useRef<Element | null>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { ref.current = document.body; setMounted(true); }, []);
+  return mounted && ref.current ? createPortal(children, ref.current) : null;
+}
 
 function load(): Initiative[] {
   if (typeof window === "undefined") return SEED;
@@ -296,7 +304,8 @@ export default function AIInitiativesPage() {
 
       {/* ── Add modal ──────────────────────────────────────── */}
       {modal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      <Portal>
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
           style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }}
           onClick={() => setModal(false)}>
           <div className="w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden animate-scale-in"
@@ -399,11 +408,13 @@ export default function AIInitiativesPage() {
             </form>
           </div>
         </div>
+      </Portal>
       )}
 
       {/* ── Detail modal ───────────────────────────────────── */}
       {viewItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      <Portal>
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
           style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }}
           onClick={() => setViewItem(null)}>
           <div className="w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-scale-in"
@@ -453,6 +464,7 @@ export default function AIInitiativesPage() {
             </div>
           </div>
         </div>
+      </Portal>
       )}
 
     </div>
