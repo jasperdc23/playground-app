@@ -210,10 +210,10 @@ export default function AIInitiativesPage() {
       </div>
 
       {/* Filters + search */}
-      <div className="rounded-2xl p-4 space-y-4" style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}>
+      <div className="flex flex-col sm:flex-row gap-3">
 
         {/* Search */}
-        <div className="flex items-center gap-2 px-3 py-2 rounded-xl" style={{ background: "var(--bg3)", border: "1px solid var(--border)" }}>
+        <div className="flex items-center gap-2 flex-1 px-3.5 py-2.5 rounded-xl" style={{ background: "var(--bg2)", border: "1px solid var(--border)" }}>
           <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "var(--text3)" }}>
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
@@ -221,67 +221,73 @@ export default function AIInitiativesPage() {
             placeholder="Search initiatives..."
             className="flex-1 bg-transparent outline-none text-sm"
             style={{ color: "var(--text)" }} />
+          {search && (
+            <button onClick={() => setSearch("")} style={{ color: "var(--text3)" }}>
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
         </div>
 
-        <div style={{ borderTop: "1px solid var(--border)", margin: "0 -4px" }} />
-
-        {/* Platform filter */}
-        <div>
-          <p className="text-[10px] font-bold uppercase tracking-widest mb-2.5" style={{ color: "var(--text3)" }}>AI Platform</p>
-          <div className="flex gap-2 flex-wrap">
-            <button onClick={() => setFilter("All")}
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
-              style={filter === "All"
-                ? { background: "#6D5BD0", color: "white" }
-                : { background: "var(--bg3)", color: "var(--text3)", border: "1px solid var(--border)" }}>
-              All platforms
-            </button>
-            {PLATFORMS.map(p => {
-              const pc = PLATFORM_CONFIG[p];
-              const active = filter === p;
-              return (
-                <button key={p} onClick={() => setFilter(p)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
-                  style={active
-                    ? { background: pc.bg, color: pc.color, border: `1px solid ${pc.color}40` }
-                    : { background: "var(--bg3)", color: "var(--text3)", border: "1px solid var(--border)" }}>
-                  <span className="w-2 h-2 rounded-full shrink-0" style={{ background: pc.color }} />
-                  {p}
-                </button>
-              );
-            })}
+        {/* Platform dropdown */}
+        <div className="relative">
+          <label className="absolute -top-2 left-3 text-[10px] font-bold uppercase tracking-wider px-1 z-10"
+            style={{ background: "var(--bg)", color: "var(--text3)" }}>Platform</label>
+          <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl cursor-pointer"
+            style={{ background: "var(--bg2)", border: `1px solid ${filter !== "All" ? PLATFORM_CONFIG[filter as Platform]?.color + "60" : "var(--border)"}`, minWidth: 160 }}>
+            {filter !== "All" && (
+              <span className="w-2 h-2 rounded-full shrink-0" style={{ background: PLATFORM_CONFIG[filter as Platform]?.color }} />
+            )}
+            <select
+              value={filter}
+              onChange={e => setFilter(e.target.value as Platform | "All")}
+              className="flex-1 bg-transparent outline-none text-sm font-medium appearance-none cursor-pointer"
+              style={{ color: filter !== "All" ? PLATFORM_CONFIG[filter as Platform]?.color : "var(--text2)" }}>
+              <option value="All">All platforms</option>
+              {PLATFORMS.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
+            <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "var(--text3)" }}>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
         </div>
 
-        <div style={{ borderTop: "1px solid var(--border)", margin: "0 -4px" }} />
-
-        {/* Status filter */}
-        <div>
-          <p className="text-[10px] font-bold uppercase tracking-widest mb-2.5" style={{ color: "var(--text3)" }}>Status</p>
-          <div className="flex gap-2 flex-wrap">
-            <button onClick={() => setStatus("All")}
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
-              style={statusFilter === "All"
-                ? { background: "#6D5BD0", color: "white" }
-                : { background: "var(--bg3)", color: "var(--text3)", border: "1px solid var(--border)" }}>
-              All statuses
-            </button>
-            {STATUSES.map(s => {
-              const sc = STATUS_CONFIG[s];
-              const active = statusFilter === s;
-              return (
-                <button key={s} onClick={() => setStatus(s)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
-                  style={active
-                    ? { background: sc.bg, color: sc.color, border: `1px solid ${sc.dot}40` }
-                    : { background: "var(--bg3)", color: "var(--text3)", border: "1px solid var(--border)" }}>
-                  <span className="w-2 h-2 rounded-full shrink-0" style={{ background: sc.dot, ...(s === "Live" ? { boxShadow: `0 0 5px ${sc.dot}` } : {}) }} />
-                  {s}
-                </button>
-              );
-            })}
+        {/* Status dropdown */}
+        <div className="relative">
+          <label className="absolute -top-2 left-3 text-[10px] font-bold uppercase tracking-wider px-1 z-10"
+            style={{ background: "var(--bg)", color: "var(--text3)" }}>Status</label>
+          <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl cursor-pointer"
+            style={{ background: "var(--bg2)", border: `1px solid ${statusFilter !== "All" ? STATUS_CONFIG[statusFilter as Status]?.dot + "60" : "var(--border)"}`, minWidth: 160 }}>
+            {statusFilter !== "All" && (
+              <span className="w-2 h-2 rounded-full shrink-0" style={{ background: STATUS_CONFIG[statusFilter as Status]?.dot }} />
+            )}
+            <select
+              value={statusFilter}
+              onChange={e => setStatus(e.target.value as Status | "All")}
+              className="flex-1 bg-transparent outline-none text-sm font-medium appearance-none cursor-pointer"
+              style={{ color: statusFilter !== "All" ? STATUS_CONFIG[statusFilter as Status]?.color : "var(--text2)" }}>
+              <option value="All">All statuses</option>
+              {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+            <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: "var(--text3)" }}>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
         </div>
+
+        {/* Clear filters — only shown when active */}
+        {(filter !== "All" || statusFilter !== "All" || search) && (
+          <button
+            onClick={() => { setFilter("All"); setStatus("All"); setSearch(""); }}
+            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all hover:scale-105 shrink-0"
+            style={{ background: "rgba(239,68,68,0.08)", color: "#ef4444", border: "1px solid rgba(239,68,68,0.2)" }}>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            Clear
+          </button>
+        )}
 
       </div>
 
