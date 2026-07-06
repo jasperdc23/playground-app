@@ -72,57 +72,50 @@ body {
 .ep-logo-themed { filter: brightness(0) invert(1); }
 [data-theme="light"] .ep-logo-themed { filter: brightness(0) saturate(100%); }
 
-/* ── Clerk auth form — light mode overrides ── */
+/* ── Auth page animations ── */
+@keyframes authSpin    { from { transform: rotate(0deg) }   to { transform: rotate(360deg) } }
+@keyframes authSpinRev { from { transform: rotate(0deg) }   to { transform: rotate(-360deg) } }
+@keyframes authPulse   { 0%,100% { opacity: 0.6; transform: scale(1) } 50% { opacity: 1; transform: scale(1.15) } }
+@keyframes authFloat   { 0%,100% { transform: translateY(0px) } 50% { transform: translateY(-12px) } }
+@keyframes authOrbDrift { 0%,100% { transform: translate(0,0) } 33% { transform: translate(30px,-20px) } 66% { transform: translate(-20px,15px) } }
+
+.auth-orb-1 { animation: authOrbDrift 18s ease-in-out infinite; }
+.auth-orb-2 { animation: authOrbDrift 22s ease-in-out infinite 4s; }
+.auth-orb-3 { animation: authOrbDrift 16s ease-in-out infinite 8s; }
+
+/* ── Clerk: hide development mode notice ── */
+.cl-internal-b3fm6y,
+[class*="cl-"][class*="development" i],
+[class*="cl-"][class*="unsafe" i] { display: none !important; }
+
+/* ── Clerk auth form — light mode ── */
 [data-auth-theme="light"] .cl-card,
-[data-auth-theme="light"] .cl-signIn-root .cl-card,
-[data-auth-theme="light"] .cl-signUp-root .cl-card {
-  background: #ffffff !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-[data-auth-theme="light"] .cl-socialButtonsBlockButton {
-  background: #f8fafc !important;
-  border: 1px solid #e2e8f0 !important;
-  color: #1e293b !important;
-}
-[data-auth-theme="light"] .cl-socialButtonsBlockButtonText { color: #1e293b !important; }
-[data-auth-theme="light"] .cl-formFieldInput {
-  background: #f8fafc !important;
-  border-color: #e2e8f0 !important;
-  color: #111827 !important;
-}
+[data-auth-theme="light"] .cl-cardBox { background: #ffffff !important; box-shadow: none !important; border: none !important; }
+[data-auth-theme="light"] .cl-footer { background: #ffffff !important; border-top: 1px solid #f1f5f9 !important; }
+[data-auth-theme="light"] .cl-socialButtonsBlockButton { background: #f8fafc !important; border: 1px solid #e2e8f0 !important; color: #1e293b !important; }
+[data-auth-theme="light"] .cl-socialButtonsBlockButtonText,
+[data-auth-theme="light"] .cl-socialButtonsBlockButtonArrow { color: #1e293b !important; }
+[data-auth-theme="light"] .cl-formFieldInput { background: #f8fafc !important; border-color: #e2e8f0 !important; color: #111827 !important; }
 [data-auth-theme="light"] .cl-formFieldLabel { color: #374151 !important; }
 [data-auth-theme="light"] .cl-dividerLine { background: #e2e8f0 !important; }
 [data-auth-theme="light"] .cl-dividerText { color: #9ca3af !important; }
 [data-auth-theme="light"] .cl-footerActionText { color: #6b7280 !important; }
 [data-auth-theme="light"] .cl-identityPreviewText { color: #111827 !important; }
-[data-auth-theme="light"] .cl-internal-b3fm6y { background: #ffffff !important; }
-[data-auth-theme="light"] .cl-cardBox { background: #ffffff !important; box-shadow: none !important; }
+[data-auth-theme="light"] [class*="cl-internal"] { background: #ffffff !important; }
 
-/* ── Clerk auth form — dark mode overrides ── */
+/* ── Clerk auth form — dark mode ── */
 [data-auth-theme="dark"] .cl-card,
-[data-auth-theme="dark"] .cl-cardBox {
-  background: #0d1117 !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-[data-auth-theme="dark"] .cl-socialButtonsBlockButton {
-  background: #111827 !important;
-  border: 1px solid rgba(255,255,255,0.08) !important;
-  color: #f1f5f9 !important;
-}
-[data-auth-theme="dark"] .cl-socialButtonsBlockButtonText { color: #f1f5f9 !important; }
-[data-auth-theme="dark"] .cl-formFieldInput {
-  background: #111827 !important;
-  border-color: rgba(255,255,255,0.08) !important;
-  color: #f9fafb !important;
-}
+[data-auth-theme="dark"] .cl-cardBox { background: #0d1117 !important; box-shadow: none !important; border: none !important; }
+[data-auth-theme="dark"] .cl-footer { background: #0d1117 !important; border-top: 1px solid rgba(255,255,255,0.06) !important; }
+[data-auth-theme="dark"] .cl-socialButtonsBlockButton { background: #111827 !important; border: 1px solid rgba(255,255,255,0.08) !important; color: #f1f5f9 !important; }
+[data-auth-theme="dark"] .cl-socialButtonsBlockButtonText,
+[data-auth-theme="dark"] .cl-socialButtonsBlockButtonArrow { color: #f1f5f9 !important; }
+[data-auth-theme="dark"] .cl-formFieldInput { background: #111827 !important; border-color: rgba(255,255,255,0.08) !important; color: #f9fafb !important; }
 [data-auth-theme="dark"] .cl-formFieldLabel { color: #d1d5db !important; }
 [data-auth-theme="dark"] .cl-dividerLine { background: rgba(255,255,255,0.08) !important; }
 [data-auth-theme="dark"] .cl-dividerText { color: #6b7280 !important; }
 [data-auth-theme="dark"] .cl-footerActionText { color: #9ca3af !important; }
-[data-auth-theme="dark"] .cl-footer { background: #0d1117 !important; border-top: 1px solid rgba(255,255,255,0.06) !important; }
-[data-auth-theme="dark"] .cl-internal-b3fm6y { background: #0d1117 !important; }
+[data-auth-theme="dark"] [class*="cl-internal"] { background: #0d1117 !important; }
 
 /* ── Hide GitHub from Clerk social buttons ── */
 [data-provider="github"],
