@@ -72,6 +72,58 @@ body {
 .ep-logo-themed { filter: brightness(0) invert(1); }
 [data-theme="light"] .ep-logo-themed { filter: brightness(0) saturate(100%); }
 
+/* ── Clerk auth form — light mode overrides ── */
+[data-auth-theme="light"] .cl-card,
+[data-auth-theme="light"] .cl-signIn-root .cl-card,
+[data-auth-theme="light"] .cl-signUp-root .cl-card {
+  background: #ffffff !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+[data-auth-theme="light"] .cl-socialButtonsBlockButton {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #1e293b !important;
+}
+[data-auth-theme="light"] .cl-socialButtonsBlockButtonText { color: #1e293b !important; }
+[data-auth-theme="light"] .cl-formFieldInput {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+  color: #111827 !important;
+}
+[data-auth-theme="light"] .cl-formFieldLabel { color: #374151 !important; }
+[data-auth-theme="light"] .cl-dividerLine { background: #e2e8f0 !important; }
+[data-auth-theme="light"] .cl-dividerText { color: #9ca3af !important; }
+[data-auth-theme="light"] .cl-footerActionText { color: #6b7280 !important; }
+[data-auth-theme="light"] .cl-identityPreviewText { color: #111827 !important; }
+[data-auth-theme="light"] .cl-internal-b3fm6y { background: #ffffff !important; }
+[data-auth-theme="light"] .cl-cardBox { background: #ffffff !important; box-shadow: none !important; }
+
+/* ── Clerk auth form — dark mode overrides ── */
+[data-auth-theme="dark"] .cl-card,
+[data-auth-theme="dark"] .cl-cardBox {
+  background: #0d1117 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+[data-auth-theme="dark"] .cl-socialButtonsBlockButton {
+  background: #111827 !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  color: #f1f5f9 !important;
+}
+[data-auth-theme="dark"] .cl-socialButtonsBlockButtonText { color: #f1f5f9 !important; }
+[data-auth-theme="dark"] .cl-formFieldInput {
+  background: #111827 !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #f9fafb !important;
+}
+[data-auth-theme="dark"] .cl-formFieldLabel { color: #d1d5db !important; }
+[data-auth-theme="dark"] .cl-dividerLine { background: rgba(255,255,255,0.08) !important; }
+[data-auth-theme="dark"] .cl-dividerText { color: #6b7280 !important; }
+[data-auth-theme="dark"] .cl-footerActionText { color: #9ca3af !important; }
+[data-auth-theme="dark"] .cl-footer { background: #0d1117 !important; border-top: 1px solid rgba(255,255,255,0.06) !important; }
+[data-auth-theme="dark"] .cl-internal-b3fm6y { background: #0d1117 !important; }
+
 /* ── Hide GitHub from Clerk social buttons ── */
 [data-provider="github"],
 .cl-socialButtonsIconButton__github,

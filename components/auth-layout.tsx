@@ -127,7 +127,8 @@ export default function AuthLayout({ mode, heading, subheading, rightHeading, ri
         </div>
 
         {/* Clerk form */}
-        <div className="flex-1 rounded-2xl p-6" style={{ background: cardBg, border: `1px solid ${borderColor}` }}>
+        <div className="flex-1 rounded-2xl overflow-hidden" data-auth-theme={dark ? "dark" : "light"}
+          style={{ background: cardBg, border: `1px solid ${borderColor}` }}>
           {mode === "sign-in" ? (
             <SignIn appearance={{ variables: clerkVars, elements: clerkElements }} />
           ) : (
