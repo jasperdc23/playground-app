@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { UserProfile } from "@clerk/nextjs";
+import UserProfileThemed from "@/components/user-profile-themed";
 
 export default async function SettingsPage() {
   const user = await currentUser();
@@ -40,7 +40,7 @@ export default async function SettingsPage() {
           <h2 className="font-semibold" style={{ color: "var(--text)" }}>Manage Profile</h2>
           <p className="text-sm mt-0.5" style={{ color: "var(--text3)" }}>Update your name, picture, password, and connected accounts.</p>
         </div>
-        <UserProfile />
+        <UserProfileThemed />
       </div>
     </div>
   );
