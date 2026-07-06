@@ -72,6 +72,11 @@ body {
 .ep-logo-themed { filter: brightness(0) invert(1); }
 [data-theme="light"] .ep-logo-themed { filter: brightness(0) saturate(100%); }
 
+/* ── Hide GitHub from Clerk social buttons ── */
+[data-provider="github"],
+.cl-socialButtonsIconButton__github,
+.cl-socialButtonsBlockButton__github { display: none !important; }
+
 /* ── Scrollbar ──────────────────────────── */
 ::-webkit-scrollbar       { width:5px; height:5px; }
 ::-webkit-scrollbar-track { background: transparent; }
