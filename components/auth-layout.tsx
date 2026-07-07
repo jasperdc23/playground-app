@@ -17,14 +17,15 @@ function GoogleButton({ mode }: { mode: Mode }) {
 
   async function handleGoogle() {
     try {
-      const client = mode === "sign-in" ? signIn : signUp;
+      // Always use signIn for OAuth — Clerk handles new vs returning users automatically
+      const client = signIn ?? signUp;
       await client?.authenticateWithRedirect({
         strategy: "oauth_google",
         redirectUrl: "/sso-callback",
         redirectUrlComplete: "/dashboard",
       });
     } catch (e) {
-      console.error(e);
+      console.error("Google sign-in error:", e);
     }
   }
 
