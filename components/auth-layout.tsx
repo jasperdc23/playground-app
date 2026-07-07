@@ -15,9 +15,14 @@ interface AuthLayoutProps {
 function GoogleButton() {
   const { signIn, isLoaded } = useSignIn();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function handleGoogle() {
-    if (!isLoaded || !signIn) return;
+    setError("");
+    if (!isLoaded || !signIn) {
+      setError("Auth not ready, please refresh and try again.");
+      return;
+    }
     setLoading(true);
     try {
       await signIn.authenticateWithRedirect({
@@ -25,13 +30,15 @@ function GoogleButton() {
         redirectUrl: `${window.location.origin}/sso-callback`,
         redirectUrlComplete: "/dashboard",
       });
-    } catch (e) {
-      console.error(e);
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Something went wrong. Please try again.";
+      setError(msg);
       setLoading(false);
     }
   }
 
   return (
+    <>
     <button
       onClick={handleGoogle}
       disabled={loading}
@@ -53,6 +60,10 @@ function GoogleButton() {
       )}
       {loading ? "Redirecting to Google…" : "Continue with Google"}
     </button>
+    {error && (
+      <p className="mt-3 text-sm text-red-500 text-center">{error}</p>
+    )}
+    </>
   );
 }
 
