@@ -34,7 +34,7 @@ function GoogleButton() {
   return (
     <button
       onClick={handleGoogle}
-      disabled={!isLoaded || loading}
+      disabled={loading}
       className="w-full flex items-center justify-center gap-3 h-14 rounded-2xl text-base font-semibold transition-all hover:bg-gray-50 active:scale-[0.98] disabled:opacity-50"
       style={{ border: "1.5px solid #d1d5db", background: "#ffffff", color: "#111827" }}
     >
