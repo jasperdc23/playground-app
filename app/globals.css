@@ -86,6 +86,18 @@ body {
 /* ── Clerk: hide development mode badge ── */
 .cl-internal-b3fm6y { display: none !important; }
 
+/* ── Clerk: Google-only mode (hide all except social button) ── */
+.clerk-google-only .cl-card,
+.clerk-google-only .cl-cardBox { background: transparent !important; box-shadow: none !important; border: none !important; padding: 0 !important; }
+.clerk-google-only .cl-header,
+.clerk-google-only .cl-dividerRow,
+.clerk-google-only .cl-formFieldRow,
+.clerk-google-only .cl-formButtonRow,
+.clerk-google-only .cl-footer,
+.clerk-google-only .cl-identityPreview,
+.clerk-google-only [class*="cl-internal"] { display: none !important; }
+.clerk-google-only .cl-socialButtonsBlockButton { width: 100% !important; }
+
 /* ── Hide GitHub from Clerk social buttons ── */
 [data-provider="github"],
 .cl-socialButtonsIconButton__github,
